@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Music Player</string>
+    <string name="explorer_artist">Explorer Artist</string>
+    <string name="unknown_artist">Unknown Artist</string>
+    <string name="no_music">No music found on device</string>
+    <string name="permission_denied">Cần quyền truy cập để đọc nhạc</string>
+</resources>

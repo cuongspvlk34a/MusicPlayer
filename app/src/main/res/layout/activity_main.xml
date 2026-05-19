@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:paddingTop="48dp"
+        android:background="#CC0F0F1E">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/explorer_artist"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <!-- Song count — cập nhật từ MainActivity -->
+            <TextView
+                android:id="@+id/songCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Gạch nhấn màu accent -->
+        <View
+            android:layout_width="48dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorAccent" />
+    </LinearLayout>
+
+    <!-- Danh sách bài hát -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/musicRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:padding="12dp"
+        android:scrollbars="none" />
+
+    <!-- Trạng thái rỗng -->
+    <TextView
+        android:id="@+id/tvNoSongs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="48dp"
+        android:text="@string/no_music"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</LinearLayout>

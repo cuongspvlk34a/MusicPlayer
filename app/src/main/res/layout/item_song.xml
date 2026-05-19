@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/song_item_bg"
+    android:padding="12dp">
+
+    <!-- Album art (Glide CircleCrop sẽ tạo hình tròn) -->
+    <ImageView
+        android:id="@+id/imgAlbumArt"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fav_icon"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Tiêu đề bài hát -->
+    <TextView
+        android:id="@+id/tvSongTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/imgAlbumArt"
+        app:layout_constraintEnd_toStartOf="@id/tvDuration"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvArtist" />
+
+    <!-- Tên nghệ sĩ -->
+    <TextView
+        android:id="@+id/tvArtist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/imgAlbumArt"
+        app:layout_constraintEnd_toStartOf="@id/tvDuration"
+        app:layout_constraintTop_toBottomOf="@id/tvSongTitle"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Thời lượng -->
+    <TextView
+        android:id="@+id/tvDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

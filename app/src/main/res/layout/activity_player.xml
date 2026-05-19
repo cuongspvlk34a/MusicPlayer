@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/playerRootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPlayerBg">
+
+    <!-- ── 1. BACKGROUND BLUR (z-order thấp nhất, đặt đầu tiên) ── -->
+    <!-- CẢI THIỆN 3: bgBlurImage — Glide sẽ load album art bị blur vào đây -->
+    <ImageView
+        android:id="@+id/bgBlurImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:alpha="0.35"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── 2. OVERLAY TỐI nhẹ phía trên bgBlurImage ── -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── 3. NÚT BACK — dùng back.png từ zip (CẢI THIỆN 2) ── -->
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/back"
+        android:scaleType="centerInside"
+        android:padding="8dp"
+        android:contentDescription="Back"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ── 4. NÚT FAVORITE ── -->
+    <ImageView
+        android:id="@+id/btnFavorite"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/fav_icon"
+        android:scaleType="centerInside"
+        android:padding="8dp"
+        android:alpha="0.5"
+        android:contentDescription="Favorite"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ── 5. ALBUM ART XOAY ── -->
+    <!-- LỖI 3 FIX: id là imgAlbumArt — ObjectAnimator target đúng -->
+    <!-- Hình tròn nhờ Glide CircleCrop + clipToOutline + circular bg -->
+    <ImageView
+        android:id="@+id/imgAlbumArt"
+        android:layout_width="248dp"
+        android:layout_height="248dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fav_icon"
+        android:contentDescription="Album Art"
+        android:clipToOutline="true"
+        android:elevation="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+
+    <!-- ── 6. TIÊU ĐỀ BÀI HÁT ── -->
+    <TextView
+        android:id="@+id/tvSongTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgAlbumArt" />
+
+    <!-- ── 7. TÊN NGHỆ SĨ ── -->
+    <TextView
+        android:id="@+id/tvArtist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSongTitle" />
+
+    <!-- ── 8. WAVEFORM SEEKBAR ── -->
+    <com.masoudss.lib.WaveformSeekBar
+        android:id="@+id/waveformSeekBar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvArtist" />
+
+    <!-- ── 9. THỜI GIAN HIỆN TẠI ── -->
+    <TextView
+        android:id="@+id/tvCurrentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="11sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waveformSeekBar" />
+
+    <!-- ── 10. TỔNG THỜI GIAN ── -->
+    <TextView
+        android:id="@+id/tvTotalTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="11sp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waveformSeekBar" />
+
+    <!-- ── 11. THANH CONTROLS ── -->
+    <!-- CẢI THIỆN 6: dùng Android system drawables cho media icons -->
+    <LinearLayout
+        android:id="@+id/controlsLayout"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="32dp"
+        android:weightSum="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCurrentTime"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- [SỬA] Repeat — dùng ic_repeat thay vì ic_menu_rotate, bỏ android:tint tĩnh -->
+        <!-- Code sẽ gọi setImageResource(ic_repeat / ic_repeat_one) và setColorFilter() -->
+        <ImageView
+            android:id="@+id/btnRepeat"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_repeat"
+            android:scaleType="centerInside"
+            android:alpha="0.4"
+            android:contentDescription="Repeat" />
+
+        <!-- Previous -->
+        <ImageView
+            android:id="@+id/btnPrevious"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_previous"
+            android:scaleType="centerInside"
+            android:tint="@color/white"
+            android:contentDescription="Previous" />
+
+        <!-- Play / Pause — nút to nhất, có background tròn -->
+        <ImageView
+            android:id="@+id/btnPlayPause"
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_pause"
+            android:scaleType="centerInside"
+            android:padding="14dp"
+            android:background="@drawable/circle_button_bg"
+            android:tint="@color/white"
+            android:contentDescription="Play Pause" />
+
+        <!-- Next -->
+        <ImageView
+            android:id="@+id/btnNext"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_next"
+            android:scaleType="centerInside"
+            android:tint="@color/white"
+            android:contentDescription="Next" />
+
+        <!-- [SỬA] Shuffle — dùng ic_shuffle thay vì ic_popup_sync, bỏ android:tint tĩnh -->
+        <!-- Code sẽ gọi setImageResource(ic_shuffle) và setColorFilter() -->
+        <ImageView
+            android:id="@+id/btnShuffle"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_shuffle"
+            android:scaleType="centerInside"
+            android:alpha="0.4"
+            android:contentDescription="Shuffle" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
